@@ -1,0 +1,46 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "Properties/WMAppManifest.xml": {
+                "parents": {
+                    "/Deployment/App/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_LOCATION\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"wp-package\" value=\"InAppBrowser\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
+        }
+    },
+    "dependent_plugins": {}
+}

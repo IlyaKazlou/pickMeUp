@@ -1,2 +1,2 @@
-platforms/*
-plugins/*
+platforms/wp8*
+plugins/cordova*
