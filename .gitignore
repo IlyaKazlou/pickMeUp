@@ -1,2 +1,5 @@
 platforms/wp8*
 plugins/cordova*
+node_modules/ripple-emulator/node_modules/*
+node_modules/*
+*/android/*
