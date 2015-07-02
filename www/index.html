@@ -11,12 +11,16 @@
     </head>
     <body>
     <div id="app">
-        <div class="app" ng-view>
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Pick Me Up</p>
+        <div ng-controller="parentController">
+            <div ng-include="'js/app/views/header.html'"></div>
+            <div class="app" ng-view>
+                <h1>Apache Cordova</h1>
+                <div id="deviceready" class="blink">
+                    <p class="event listening">Connecting to Device</p>
+                    <p class="event received">Pick Me Up</p>
+                </div>
             </div>
+            <div ng-include="'js/app/views/footer.html'"></div>
         </div>
     </div>
 
@@ -26,6 +30,7 @@
         <!--controller loading-->
         <script type="text/javascript" src="js/app/controllers/homeController.js"></script>
         <script type="text/javascript" src="js/app/controllers/loginController.js"></script>
+        <script type="text/javascript" src="js/app/controllers/parentController.js"></script>
 
         <!--libs-->
         <script type="text/javascript" src="js/plugins/jquery-2.1.1.min.js"></script>
