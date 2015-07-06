@@ -6,6 +6,7 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
     </head>
@@ -20,17 +21,18 @@
                     <p class="event received">Pick Me Up</p>
                 </div>
             </div>
-            <div ng-include="'js/app/views/footer.html'"></div>
         </div>
     </div>
 
         <!--service loading-->
-        <script type="text/javascript" src="js/app/services/authService.js"></script>
+        <script type="text/javascript" src="js/app/services/authServiceFactory.js"></script>
+        <script type="text/javascript" src="js/app/services/mapServiceFactory.js"></script>
 
         <!--controller loading-->
         <script type="text/javascript" src="js/app/controllers/homeController.js"></script>
         <script type="text/javascript" src="js/app/controllers/loginController.js"></script>
         <script type="text/javascript" src="js/app/controllers/parentController.js"></script>
+        <script type="text/javascript" src="js/app/controllers/mapController.js"></script>
 
         <!--libs-->
         <script type="text/javascript" src="js/plugins/jquery-2.1.1.min.js"></script>
@@ -38,6 +40,8 @@
         <script type="text/javascript" src="js/plugins/angular.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular-route.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular-local-storage.min.js"></script>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script type="text/javascript" src="js/plugins/collapse.js"></script>
 
         <!--Web Client-->
         <script type="text/javascript" src="js/app/services/webClient.js"></script>

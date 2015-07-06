@@ -1,6 +1,6 @@
 "use strict";
 
-function authService($http, $q, localStorageService, webClient, ngAuthSettings){
+function authServiceFactory($http, $q, localStorageService, webClient, ngAuthSettings){
 
 	var service = {};
 

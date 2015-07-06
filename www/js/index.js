@@ -13,8 +13,10 @@ function MobileApp(ngInitializer){
     };
 
     self.onDeviceReady = function () {
-        mobileApp.receivedEvent('deviceready');
-        ngInitializer.init();
+        window.setTimeout(function () {
+            mobileApp.receivedEvent('deviceready');
+            ngInitializer.init();
+        }, 1500);
     };
 
     self.receivedEvent = function (id) {

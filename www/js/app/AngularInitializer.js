@@ -48,9 +48,14 @@ function AngularInitializer(options){
 	        });
 
 	        $routeProvider.when("/login", {
-	            controller: "loginController",
-	            templateUrl: "js/app/views/login.html"
-	        });
+                controller: "loginController",
+                templateUrl: "js/app/views/login.html"
+            });
+
+            $routeProvider.when("/map", {
+                controller: "mapController",
+                templateUrl: "js/app/views/map.html"
+            });
 
 	        $routeProvider.otherwise({ redirectTo: "/home" });
 
@@ -60,6 +65,8 @@ function AngularInitializer(options){
 	self.setOnAppReadyAction = function (module) {
 		module.run(['$location','localStorageService', function (location,localStorageService) {
             location.path('/home');
+            self.initCss();
+
             return;
             /*Temporarily*/
 	        var authData = localStorageService.getItem("authData");
@@ -70,11 +77,23 @@ function AngularInitializer(options){
 	};
 
 	self.initCore = function (module) {
+        module.factory("webClient", [webClient]);
+        module.factory("authService", ['$http', '$q', 'localStorageService', 'webClient','ngAuthSettings', authServiceFactory]);
+        module.factory("mapService", ['$http', '$q', mapServiceFactory]);
+
         module.controller('parentController', ['$scope', 'localStorageService','appConstants', parentController]);
 		module.controller('homeController', ['$scope', homeController]);
     	module.controller('loginController', ['$scope', 'localStorageService','$location', 'authService', 'ngAuthSettings', loginController]);
-
-    	module.factory("webClient", [webClient]);
-    	module.factory("authService", ['$http', '$q', 'localStorageService', 'webClient','ngAuthSettings', authService]);
+        module.controller('loginController', ['$scope', "mapService", mapController]);
 	};
+
+    self.initCss = function () {
+        $(".app").css({
+            "background-image" : "none",
+            "padding" : "0",
+            "position" : "static",
+            "margin" : "0",
+            "width" : "100%"
+        });
+    };
 }

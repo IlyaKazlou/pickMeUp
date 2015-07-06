@@ -1,6 +1,11 @@
 function parentController($scope, localStorageService,appConstants) {
-    $scope.userName = 'Ilya Kazlou';
+    $scope.user = {
+        name : 'Ilya Kazlou',
+        id : "B0432BDE-DBDA-467A-8C5F-20C90BE8E8EF"
+    };
+
     $scope.currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
+    $scope.userIsDriver = $scope.currentRole == appConstants.roles.driverRoleName;
 
     $scope.displayHeader = true;
     $scope.displayFooter = true;
@@ -13,9 +18,6 @@ function parentController($scope, localStorageService,appConstants) {
             localStorageService.set('currentRole', appConstants.roles.passengerRoleName);
             $scope.currentRole = appConstants.roles.passengerRoleName;
         }
-    };
-
-    $scope.toggleFooter = function (){
-        $scope.displayFooter = !$scope.displayFooter;
+        $scope.userIsDriver = !$scope.userIsDriver;
     };
 };

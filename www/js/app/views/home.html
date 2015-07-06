@@ -1,3 +1,9 @@
 <div>
-	Home here
+    <div ng-show="userIsDriver">
+        <img src="img/notify.png" alt="img"/>
+    </div>
+
+    <div ng-show="!userIsDriver">
+        <img src="img/pickmeup.png" alt="img"/>
+    </div>
 </div>
