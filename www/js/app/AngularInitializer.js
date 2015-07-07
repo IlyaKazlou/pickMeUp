@@ -20,10 +20,10 @@ function AngularInitializer(options){
 	    //var serviceBase = 'http://localhost:60560/'; //Mobile Service
 	    //var serviceBase = 'https://pickmeupmobile.azure-mobile.net/';
 
-	    //var serviceBase = 'http://localhost:54205/';
-	    var serviceBase = 'http://pickmeupglobal.azurewebsites.net/';
+	    var serviceBase = 'http://localhost:100/PickMeApp/';
+	    //var serviceBase = 'http://pickmeupglobal.azurewebsites.net/';
 
-	    module.constant('ngAuthSettings', {
+	    module.constant('backendSettings', {
             apiServiceBaseUri: serviceBase,
             webClient: 'ngAuthApp'
         });
@@ -78,11 +78,11 @@ function AngularInitializer(options){
 
 	self.initCore = function (module) {
         module.factory("webClient", [webClient]);
-        module.factory("authService", ['$http', '$q', 'localStorageService', 'webClient','ngAuthSettings', authServiceFactory]);
-        module.factory("mapService", ['$http', '$q', mapServiceFactory]);
+        module.factory("backendSettings", ['$http', '$q', 'localStorageService', 'webClient','backendSettings', authServiceFactory]);
+        module.factory("mapService", ['$http', '$q', 'backendSettings', mapServiceFactory]);
 
         module.controller('parentController', ['$scope', 'localStorageService','appConstants', parentController]);
-		module.controller('homeController', ['$scope', homeController]);
+		module.controller('homeController', ['$scope', '$location', homeController]);
     	module.controller('loginController', ['$scope', 'localStorageService','$location', 'authService', 'ngAuthSettings', loginController]);
         module.controller('loginController', ['$scope', "mapService", mapController]);
 	};

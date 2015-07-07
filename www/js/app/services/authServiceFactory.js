@@ -1,6 +1,6 @@
 "use strict";
 
-function authServiceFactory($http, $q, localStorageService, webClient, ngAuthSettings){
+function authServiceFactory($http, $q, localStorageService, webClient, backendSettings){
 
 	var service = {};
 
@@ -8,7 +8,7 @@ function authServiceFactory($http, $q, localStorageService, webClient, ngAuthSet
 
 	var _login = function (provider) {
 		var deferred = $q.defer();
-		var baseUri = ngAuthSettings.apiServiceBaseUri;
+		var baseUri = backendSettings.apiServiceBaseUri;
 
 		$http.post(baseUri + "api/Account/ExternalLogin", { Provider: provider }).success(function (response) {
 			deferred.resolve(response);

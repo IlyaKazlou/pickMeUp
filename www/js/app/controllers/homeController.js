@@ -1,5 +1,8 @@
 ﻿'use strict';
 
-function homeController($scope) {
-   
+function homeController($scope, $location) {
+
+    $scope.buttonClick = function () {
+        $location.path('/map');
+    };
 };

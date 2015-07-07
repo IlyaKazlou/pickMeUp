@@ -1,23 +1,24 @@
 function parentController($scope, localStorageService,appConstants) {
+    var currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
+
     $scope.user = {
         name : 'Ilya Kazlou',
-        id : "B0432BDE-DBDA-467A-8C5F-20C90BE8E8EF"
+        id : "0474EB2C-E6E7-4A24-8E5C-0718FB9ED906",
+        currentRole : currentRole,
+        userIsDriver : currentRole == appConstants.roles.driverRoleName
     };
-
-    $scope.currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
-    $scope.userIsDriver = $scope.currentRole == appConstants.roles.driverRoleName;
 
     $scope.displayHeader = true;
     $scope.displayFooter = true;
 
     $scope.changeRole = function () {
-        if ($scope.currentRole == appConstants.roles.passengerRoleName){
+        if ($scope.user.currentRole == appConstants.roles.passengerRoleName){
             localStorageService.set('currentRole', appConstants.roles.driverRoleName);
-            $scope.currentRole = appConstants.roles.driverRoleName;
+            $scope.user.currentRole = appConstants.roles.driverRoleName;
         }else{
             localStorageService.set('currentRole', appConstants.roles.passengerRoleName);
-            $scope.currentRole = appConstants.roles.passengerRoleName;
+            $scope.user.currentRole = appConstants.roles.passengerRoleName;
         }
-        $scope.userIsDriver = !$scope.userIsDriver;
+        $scope.user.userIsDriver = !$scope.user.userIsDriver;
     };
 };
