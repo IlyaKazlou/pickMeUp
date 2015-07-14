@@ -20,7 +20,7 @@ function mapServiceFactory($http, $q, backendSettings){
 
             placemark = new ymaps.Placemark([position.coords.latitude, position.coords.longitude]);
             map.geoObjects.add(placemark);
-            deferred.resolve(position)
+            deferred.resolve({ position: position, map: map });
         });
 
         return deferred.promise;
@@ -38,9 +38,9 @@ function mapServiceFactory($http, $q, backendSettings){
         return deferred.promise;
     };
 
-    var _addSubscribersToMap = function (userId, currentUserRole) {
+    var _addSubscribersToMap = function (userId, currentUserRole, map) {
         _getSubscribers(userId, currentUserRole).then(function (subscribers){
-            if (subscribers) return;
+            if (!subscribers) return;
             for (var i = 0; i < subscribers.length; i++){
                 var latestPoint = subscribers[i].LatestPoint;
                 if (latestPoint)
