@@ -1,35 +1,20 @@
 "use strict";
 
-function authServiceFactory($http, $q, localStorageService, webClient, backendSettings){
-
+function authServiceFactory($http, $q, backendSettings){
 	var service = {};
-
-	//var client = webClient.getClient('release');
+    var baseUri = backendSettings.apiServiceBaseUri;
 
 	var _login = function (provider) {
-		var deferred = $q.defer();
-		var baseUri = backendSettings.apiServiceBaseUri;
+        var redirectUri = "http://pickmeupsiteapp.azurewebsites.net/Home/SuccessfulAuthorization";
+        //var redirectUri = window.location.href;
 
-		$http.post(baseUri + "api/Account/ExternalLogin", { Provider: provider }).success(function (response) {
-			deferred.resolve(response);
-		}).error(function (e){
-			deferred.reject(e);
-		});
+        var externalProviderUrl = baseUri + "api/Account/ExternalLogin?provider=" + provider
+            + "&response_type=token" + "&redirect_uri=" + redirectUri;
 
-		return deferred.promise;
-	}
-/*
-	var _login = function (provider) {
-		var deferred = $q.defer();
-
-		client.login(provider).then(function (results) {
-            deferred.resolve(results);
-        }, function (error) {
-            deferred.reject(error);
-        });
-
-		return deferred.promise;
-	}*/
+        cordova.exec(function () {}, function (e) {
+            console.log(e);
+        }, "InAppBrowser", "open", [externalProviderUrl, '_blank', 'location=yes']);
+    };
 
 	service.login = _login;
 

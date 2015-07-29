@@ -1,4 +1,4 @@
-function parentController($scope, localStorageService,appConstants) {
+function parentController($scope, localStorageService,appConstants, authService) {
     var currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
 
     $scope.user = {
@@ -20,5 +20,9 @@ function parentController($scope, localStorageService,appConstants) {
             $scope.user.currentRole = appConstants.roles.passengerRoleName;
         }
         $scope.user.userIsDriver = !$scope.user.userIsDriver;
+    };
+
+    $scope.loginFB = function () {
+        authService.login('Facebook');
     };
 };

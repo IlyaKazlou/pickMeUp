@@ -17,11 +17,8 @@ function AngularInitializer(options){
 	self.getModule = function () {
 		var module = angular.module(self.moduleName, ['ngRoute', 'LocalStorageModule']);
 
-	    //var serviceBase = 'http://localhost:60560/'; //Mobile Service
-	    //var serviceBase = 'https://pickmeupmobile.azure-mobile.net/';
-
-	    var serviceBase = 'http://localhost:100/PickMeApp/';
-	    //var serviceBase = 'http://pickmeupglobal.azurewebsites.net/';
+	    //var serviceBase = 'http://localhost:100/PickMeApp/';
+	    var serviceBase = 'http://pickmeupsiteapp.azurewebsites.net/';
 
 	    module.constant('backendSettings', {
             apiServiceBaseUri: serviceBase,
@@ -47,10 +44,6 @@ function AngularInitializer(options){
 	            templateUrl: "js/app/views/home.html"
 	        });
 
-	        $routeProvider.when("/login", {
-                controller: "loginController",
-                templateUrl: "js/app/views/login.html"
-            });
 
             $routeProvider.when("/map", {
                 controller: "mapController",
@@ -77,14 +70,13 @@ function AngularInitializer(options){
 	};
 
 	self.initCore = function (module) {
-        module.factory("webClient", [webClient]);
         module.factory("backendSettings", ['$http', '$q', 'localStorageService', 'webClient','backendSettings', authServiceFactory]);
         module.factory("mapService", ['$http', '$q', 'backendSettings', mapServiceFactory]);
+        module.factory("authService", ['$http', '$q', 'backendSettings', authServiceFactory]);
 
-        module.controller('parentController', ['$scope', 'localStorageService','appConstants', parentController]);
+        module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', parentController]);
 		module.controller('homeController', ['$scope', '$location', homeController]);
-    	module.controller('loginController', ['$scope', 'localStorageService','$location', 'authService', 'ngAuthSettings', loginController]);
-        module.controller('loginController', ['$scope', "mapService", mapController]);
+        module.controller('mapController', ['$scope', "mapService", mapController]);
 	};
 
     self.initCss = function () {
