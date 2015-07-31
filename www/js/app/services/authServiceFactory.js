@@ -11,7 +11,9 @@ function authServiceFactory($http, $q, backendSettings){
         var externalProviderUrl = baseUri + "api/Account/ExternalLogin?provider=" + provider
             + "&response_type=token" + "&redirect_uri=" + redirectUri;
 
-        cordova.exec(function () {}, function (e) {
+        cordova.exec(function (resp) {
+            window.alert('Success');
+        }, function (e) {
             console.log(e);
         }, "InAppBrowser", "open", [externalProviderUrl, '_blank', 'location=yes']);
     };

@@ -54,11 +54,12 @@ function mapServiceFactory($http, $q, backendSettings){
 
     var _getCurrentPosition = function () {
         var deferred = $q.defer();
+        var options = { timeout: 100000, enableHighAccuracy: true, maximumAge: 90000 };
         navigator.geolocation.getCurrentPosition(function (position) {
             deferred.resolve(position);
         }, function (error) {
             deferred.resolve(error);
-        });
+        }, options);
 
         return deferred.promise;
     };

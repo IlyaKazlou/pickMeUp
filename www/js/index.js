@@ -16,7 +16,7 @@ function MobileApp(ngInitializer){
         window.setTimeout(function () {
             mobileApp.receivedEvent('deviceready');
             ngInitializer.init();
-        }, 1500);
+        }, 500);
     };
 
     self.receivedEvent = function (id) {

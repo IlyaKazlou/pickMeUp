@@ -6,8 +6,17 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+        <meta http-equiv="Content-Security-Policy"
+              content="script-src * 'unsafe-eval';
+                      connect-src * 'unsafe-eval';
+                      object-src 'self';
+                      style-src * 'unsafe-inline';
+                      img-src *">
+
         <title>Hello World</title>
     </head>
     <body>
@@ -21,12 +30,13 @@
                     <p class="event received">Pick Me Up</p>
                 </div>
             </div>
-        </div>
+    </div>
     </div>
 
         <!--service loading-->
         <script type="text/javascript" src="js/app/services/authServiceFactory.js"></script>
         <script type="text/javascript" src="js/app/services/mapServiceFactory.js"></script>
+        <script type="text/javascript" src="js/app/services/authInterceptorServiceFactory.js"></script>
 
         <!--controller loading-->
         <script type="text/javascript" src="js/app/controllers/homeController.js"></script>
@@ -38,8 +48,8 @@
         <script type="text/javascript" src="js/plugins/angular.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular-route.min.js"></script>
         <script type="text/javascript" src="js/plugins/angular-local-storage.min.js"></script>
-        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <script type="text/javascript" src="js/plugins/collapse.js"></script>
+        <script type="text/javascript" src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU"></script>
 
         <!--ng initializer-->
         <script type="text/javascript" src="js/app/AngularInitializer.js"></script>
@@ -50,7 +60,6 @@
         <!--app init-->
         <script type="text/javascript" src="js/index.js"></script>
 
-        <!--debug weinre-->
         <script src="http://10.6.213.22:3008/target/target-script-min.js#anonymous"></script>
     </body>
 </html>

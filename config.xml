@@ -12,8 +12,8 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-intent href="http://*" />
     <allow-intent href="tel:*" />
-    <allow-navigation href="http://*/*"/>
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
@@ -25,4 +25,5 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="orientation" value="landscape"/>
+    <preference name="loadUrlTimeoutValue" value="100000" />
 </widget>

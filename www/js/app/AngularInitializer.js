@@ -29,9 +29,11 @@ function AngularInitializer(options){
             roles: { driverRoleName: "Driver", passengerRoleName: "Passenger" }
         });
 
-	    //module.config(function ($httpProvider) {
-	        //$httpProvider.interceptors.push('authInterceptorService');
-	    //});
+        module.factory('authInterceptorService',['$q', '$injector','$location', 'localStorageService', authInterceptorServiceFactory]);
+
+	    module.config(function ($httpProvider) {
+	        $httpProvider.interceptors.push('authInterceptorService');
+	    });
 
 	    return module;
 	};
@@ -85,7 +87,8 @@ function AngularInitializer(options){
             "padding" : "0",
             "position" : "static",
             "margin" : "0",
-            "width" : "100%"
+            "width" : "100%",
+            "height" : window.innerHeight + "px"
         });
     };
 }
