@@ -1,15 +1,7 @@
-function parentController($scope, localStorageService,appConstants, authService) {
-    var currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
-
-    $scope.user = {
-        name : 'Ilya Kazlou',
-        id : "0474EB2C-E6E7-4A24-8E5C-0718FB9ED906",
-        currentRole : currentRole,
-        userIsDriver : currentRole == appConstants.roles.driverRoleName
+function parentController($scope, localStorageService,appConstants, authService, $location, $rootScope) {
+    $scope.init = function () {
+        $scope.user = $scope.getUserObject();
     };
-
-    $scope.displayHeader = true;
-    $scope.displayFooter = true;
 
     $scope.changeRole = function () {
         if ($scope.user.currentRole == appConstants.roles.passengerRoleName){
@@ -22,7 +14,42 @@ function parentController($scope, localStorageService,appConstants, authService)
         $scope.user.userIsDriver = !$scope.user.userIsDriver;
     };
 
-    $scope.loginFB = function () {
-        authService.login('Facebook');
+    $scope.logOff = function () {
+        authService.logOut();
+        $scope.user.authData = { isAuthenticated : false };
+        $scope.user.isUserLoggedOff = true;
+        $location.path('/login');
     };
+
+    $scope.$on('$routeChangeStart', function(event, next, current) {
+        if(!$scope.user.authData.isAuthenticated && $scope.user.isUserLoggedOff){
+            event.preventDefault();
+            if (current.$$route.originalPath.indexOf('login') != -1) {
+                $location.path('/exitApp');
+            }else{
+                $location.path('/login');
+            }
+        }
+    });
+
+    $scope.$on('onAuthentication', function (){
+        $scope.user = $scope.getUserObject();
+        $scope.user.isUserLoggedOff = false;
+    });
+
+    $scope.getUserObject = function () {
+        var currentRole = localStorageService.get("currentRole") || appConstants.roles.passengerRoleName;
+        var authData = localStorageService.get("authData") || { isAuthenticated : false };
+
+        var user = {
+            currentRole : currentRole,
+            userIsDriver : currentRole == appConstants.roles.driverRoleName,
+            authData: authData,
+            name: decodeURIComponent(authData.userName) || ""
+        };
+
+        return user;
+    };
+
+    $scope.init();
 };

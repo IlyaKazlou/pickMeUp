@@ -17,12 +17,12 @@
                       style-src * 'unsafe-inline';
                       img-src *">
 
-        <title>Hello World</title>
+        <title>Pick Me Up</title>
     </head>
     <body>
     <div id="app">
         <div ng-controller="parentController">
-            <div ng-include="'js/app/views/header.html'"></div>
+            <div ng-include="'js/app/views/header.html'" ng-show="user.authData && user.authData.isAuthenticated"></div>
             <div class="app" ng-view>
                 <h1>Apache Cordova</h1>
                 <div id="deviceready" class="blink">
@@ -30,7 +30,7 @@
                     <p class="event received">Pick Me Up</p>
                 </div>
             </div>
-    </div>
+        </div>
     </div>
 
         <!--service loading-->
@@ -42,6 +42,8 @@
         <script type="text/javascript" src="js/app/controllers/homeController.js"></script>
         <script type="text/javascript" src="js/app/controllers/parentController.js"></script>
         <script type="text/javascript" src="js/app/controllers/mapController.js"></script>
+        <script type="text/javascript" src="js/app/controllers/loginController.js"></script>
+        <script type="text/javascript" src="js/app/controllers/exitAppController.js"></script>
 
         <!--libs-->
         <script type="text/javascript" src="js/plugins/jquery-2.1.1.min.js"></script>

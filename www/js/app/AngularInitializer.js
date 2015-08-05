@@ -46,39 +46,45 @@ function AngularInitializer(options){
 	            templateUrl: "js/app/views/home.html"
 	        });
 
-
             $routeProvider.when("/map", {
                 controller: "mapController",
                 templateUrl: "js/app/views/map.html"
             });
 
-	        $routeProvider.otherwise({ redirectTo: "/home" });
+            $routeProvider.when("/login", {
+                controller: "loginController",
+                templateUrl: "js/app/views/login.html"
+            });
 
+            $routeProvider.otherwise({
+                controller: "exitAppController",
+                templateUrl: "js/app/views/exitApp.html"
+            });
 	    });
 	};
 
 	self.setOnAppReadyAction = function (module) {
 		module.run(['$location','localStorageService', function (location,localStorageService) {
-            location.path('/home');
             self.initCss();
 
-            return;
-            /*Temporarily*/
-	        var authData = localStorageService.getItem("authData");
-	        if (!authData){
+	        var authData = localStorageService.get("authData");
+	        if (!authData || !authData.isAuthenticated){
 	            location.path('/login');
-	        }
+	        }else{
+                location.path('/home');
+            }
 	    }]);
 	};
 
 	self.initCore = function (module) {
-        module.factory("backendSettings", ['$http', '$q', 'localStorageService', 'webClient','backendSettings', authServiceFactory]);
         module.factory("mapService", ['$http', '$q', 'backendSettings', mapServiceFactory]);
-        module.factory("authService", ['$http', '$q', 'backendSettings', authServiceFactory]);
+        module.factory("authService", ['$http', '$q', 'backendSettings', 'localStorageService', '$location', authServiceFactory]);
 
-        module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', parentController]);
-		module.controller('homeController', ['$scope', '$location', homeController]);
+        module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', '$location', '$rootScope', parentController]);
+		module.controller('homeController', ['$scope', '$location', 'localStorageService', homeController]);
         module.controller('mapController', ['$scope', "mapService", mapController]);
+        module.controller('loginController', ['$scope', "authService", "$location", 'localStorageService', '$location',loginController]);
+        module.controller('exitAppController', ['$scope', "$timeout", exitAppController]);
 	};
 
     self.initCss = function () {

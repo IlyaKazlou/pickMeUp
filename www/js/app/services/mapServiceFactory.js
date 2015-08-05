@@ -76,18 +76,6 @@ function mapServiceFactory($http, $q, backendSettings){
         return deferred.promise;
     };
 
-    var _getUrlParams = function (params){
-        var str ="?";
-        for (var i = 0; i < params.length; i++){
-            for(var prop in params[i]){
-                str += prop + "=" + params[i][prop];
-            }
-
-            str += (i < params.length - 1) ? "&" : "";
-        }
-        return str;
-    };
-
     service.createMap = function () {
         var deferred = $q.defer();
         if (!ymaps.Map) {
