@@ -30,6 +30,14 @@ function parentController($scope, localStorageService,appConstants, authService,
                 $location.path('/login');
             }
         }
+
+        if ($scope.user.authData.isAuthenticated){
+            if (next.$$route.originalPath.indexOf('login') != -1) {
+                event.preventDefault();
+                $location.replace();
+                $location.path('/home');
+            }
+        }
     });
 
     $scope.$on('onAuthentication', function (){

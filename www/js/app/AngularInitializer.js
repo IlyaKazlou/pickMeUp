@@ -52,8 +52,13 @@ function AngularInitializer(options){
             });
 
             $routeProvider.when("/login", {
-                controller: "loginController",
-                templateUrl: "js/app/views/login.html"
+                controller: "authenticationController",
+                templateUrl: "js/app/views/authentication.html"
+            });
+
+            $routeProvider.when("/subscribe", {
+                controller: "subscribeController",
+                templateUrl: "js/app/views/subscribe.html"
             });
 
             $routeProvider.otherwise({
@@ -83,7 +88,8 @@ function AngularInitializer(options){
         module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', '$location', '$rootScope', parentController]);
 		module.controller('homeController', ['$scope', '$location', 'localStorageService', homeController]);
         module.controller('mapController', ['$scope', "mapService", mapController]);
-        module.controller('loginController', ['$scope', "authService", "$location", 'localStorageService', '$location',loginController]);
+        module.controller('authenticationController', ['$scope', "authService", "$location", 'localStorageService', '$location', authenticationController]);
+        module.controller('subscribeController', ['$scope', subscribeController]);
         module.controller('exitAppController', ['$scope', "$timeout", exitAppController]);
 	};
 

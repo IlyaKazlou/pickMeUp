@@ -15,6 +15,14 @@
                         {
                             "xml": "<Capability Name=\"ID_CAP_LOCATION\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_ISV_CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_MEDIALIB_PHOTO\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -28,6 +36,10 @@
                         },
                         {
                             "xml": "<feature name=\"YoikScreenOrientation\"><param name=\"wp-package\" value=\"YoikScreenOrientation\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"wp-package\" value=\"Camera\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -46,6 +58,9 @@
             "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
         },
         "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "{bbd00fc0-1a57-11e5-9de0-41265983095e}"
         }
     },

@@ -1,0 +1,42 @@
+<div>
+	<div>
+    	<input type="button" class="log-in-btn" ng-click="loginFB()" value="Facebook"/>
+	</div>
+</div>
+
+<form id="loginForm" ng-show="data.loginFormIsVisible">
+    <div class="form-group">
+        <label for="inputEmailLogin">Email</label>
+        <input type="email" class="form-control" id="inputEmailLogin" placeholder="Email">
+    </div>
+
+    <div class="form-group">
+        <label for="inputPasswordLogin">Password</label>
+        <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Password">
+    </div>
+
+    <a ng-click="toggleForm()">Register if you doesn't have an account</a>
+</form>
+
+<form id="registerForm" ng-show="!data.loginFormIsVisible">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="email" class="form-control" id="inputName" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+    </div>
+
+    <a ng-click="toggleForm()">Login to application!</a>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
