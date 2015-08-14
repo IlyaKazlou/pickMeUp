@@ -28,6 +28,15 @@ function authServiceFactory($http, $q, backendSettings, localStorageService, $lo
         return deferred.promise;
     };
 
+    var _saveRegistration = function (registration) {
+
+        _logOut();
+
+        return $http.post(baseUri + 'api/account/register', registration).then(function (response) {
+            return response;
+        });
+    };
+
     var _getAuthObject = function (url) {
         var obj = {};
         obj.token = _getUrlParamValue(url, 'external_access_token');
@@ -57,6 +66,7 @@ function authServiceFactory($http, $q, backendSettings, localStorageService, $lo
 
 	service.login = _login;
     service.logOut = _logOut;
+    service.saveRegistration = _saveRegistration;
 
 	return service;
 };

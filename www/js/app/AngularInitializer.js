@@ -17,8 +17,8 @@ function AngularInitializer(options){
 	self.getModule = function () {
 		var module = angular.module(self.moduleName, ['ngRoute', 'LocalStorageModule']);
 
-	    //var serviceBase = 'http://localhost:100/PickMeApp/';
-	    var serviceBase = 'http://pickmeupsiteapp.azurewebsites.net/';
+	    var serviceBase = 'http://localhost:100/PickMeApp/';
+	    //var serviceBase = 'http://pickmeupsiteapp.azurewebsites.net/';
 
 	    module.constant('backendSettings', {
             apiServiceBaseUri: serviceBase,
@@ -88,7 +88,7 @@ function AngularInitializer(options){
         module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', '$location', '$rootScope', parentController]);
 		module.controller('homeController', ['$scope', '$location', 'localStorageService', homeController]);
         module.controller('mapController', ['$scope', "mapService", mapController]);
-        module.controller('authenticationController', ['$scope', "authService", "$location", 'localStorageService', '$location', authenticationController]);
+        module.controller('authenticationController', ['$scope', "authService", "$location", '$timeout', authenticationController]);
         module.controller('subscribeController', ['$scope', subscribeController]);
         module.controller('exitAppController', ['$scope', "$timeout", exitAppController]);
 	};
