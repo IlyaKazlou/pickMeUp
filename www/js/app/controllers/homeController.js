@@ -1,15 +1,10 @@
 ﻿'use strict';
 
-function homeController($scope, $location, localStorageService) {
+function homeController($scope, $location, localStorageService, organizationManagementService) {
     $scope.init = function () {
-        var authData = localStorageService.get("authData");
-        if (!authData || !authData.isAuthenticated) {
-            $scope.$emit("onAuthentication", authData);
-        }
-    };
-
-    $scope.buttonClick = function () {
-        $location.path('/map');
+        organizationManagementService.getUserOrganizations($scope.user.id).then(function (organizations) {
+            $scope.organizations = organizations;
+        });
     };
 
     $scope.init();

@@ -22,7 +22,7 @@ function AngularInitializer(options){
 
 	    module.constant('backendSettings', {
             apiServiceBaseUri: serviceBase,
-            webClient: 'ngAuthApp'
+            client: 'ngAuthApp'
         });
 
         module.constant('appConstants', {
@@ -45,6 +45,11 @@ function AngularInitializer(options){
 	            controller: "homeController",
 	            templateUrl: "js/app/views/home.html"
 	        });
+
+            $routeProvider.when("/buttonPage", {
+                controller: "buttonPageController",
+                templateUrl: "js/app/views/buttonPage.html"
+            });
 
             $routeProvider.when("/map", {
                 controller: "mapController",
@@ -84,9 +89,11 @@ function AngularInitializer(options){
 	self.initCore = function (module) {
         module.factory("mapService", ['$http', '$q', 'backendSettings', mapServiceFactory]);
         module.factory("authService", ['$http', '$q', 'backendSettings', 'localStorageService', '$location', authServiceFactory]);
+        module.factory("organizationManagementService", ['$http', '$q', 'backendSettings', organizationManagementServiceFactory]);
 
         module.controller('parentController', ['$scope', 'localStorageService','appConstants', 'authService', '$location', '$rootScope', parentController]);
-		module.controller('homeController', ['$scope', '$location', 'localStorageService', homeController]);
+		module.controller('homeController', ['$scope', '$location', 'localStorageService', 'organizationManagementService', homeController]);
+        module.controller('buttonPageController', ['$scope', '$location', 'localStorageService', buttonPageController]);
         module.controller('mapController', ['$scope', "mapService", mapController]);
         module.controller('authenticationController', ['$scope', "authService", "$location", '$timeout', authenticationController]);
         module.controller('subscribeController', ['$scope', subscribeController]);

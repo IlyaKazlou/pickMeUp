@@ -13,6 +13,11 @@ function authInterceptorServiceFactory ($q, $injector,$location, localStorageSer
             authService.logOut();
             $location.path('/login');
         }
+
+        if (rejection.status === 400) {
+            window.alert('Boom!!!');
+        }
+
         return $q.reject(rejection);
     }
 

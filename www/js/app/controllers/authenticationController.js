@@ -8,7 +8,8 @@ function authenticationController($scope, authService, $location, $timeout){
             password: "",
             confirmPassword: "",
             email: ""
-        }
+        },
+        loginData: { email: "", password: "" }
     };
 
     $scope.toggleForm = function (){
@@ -29,6 +30,16 @@ function authenticationController($scope, authService, $location, $timeout){
             }
             $scope.message = "Failed to register user due to:" + errors.join(' ');
         });
+    };
+
+    $scope.login = function () {
+        authService.login($scope.data.loginData).then(function (response) {
+                $scope.$emit('onAuthentication', response);
+                $location.path('/home');
+            },
+            function (err) {
+                $scope.message = err.error_description;
+            });
     };
 
     $scope.loginFB = function () {

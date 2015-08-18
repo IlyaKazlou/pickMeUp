@@ -4,7 +4,7 @@ function authServiceFactory($http, $q, backendSettings, localStorageService, $lo
 	var service = {};
     var baseUri = backendSettings.apiServiceBaseUri;
 
-	var _login = function (provider) {
+	var _loginExternal = function (provider) {
         var deferred = $q.defer();
         var redirectUri = "http://pickmeupsiteapp.azurewebsites.net/Home/SuccessfulAuthorization";
         //var redirectUri = window.location.href;
@@ -24,6 +24,29 @@ function authServiceFactory($http, $q, backendSettings, localStorageService, $lo
             console.log(e);
             deferred.resolve({});
         }, "InAppBrowser", "open", [externalProviderUrl, '_blank', 'location=yes']);
+
+        return deferred.promise;
+    };
+
+    var _login = function (loginData){
+        var deferred = $q.defer();
+        var data = "grant_type=password&email=" + loginData.email + "&password=" + loginData.password + "&client_id=" + backendSettings.client + "&userName=guest";
+        $http.post(baseUri + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+            var authData = {
+                token: response.access_token,
+                userName: response.userName,
+                refreshToken: response.refresh_token,
+                useRefreshTokens: true,
+                isAuthenticated: true,
+                id: response.id
+            };
+
+            localStorageService.set('authData', authData);
+            deferred.resolve(authData);
+        }).error(function (err, status) {
+            _logOut();
+            deferred.reject(err);
+        });
 
         return deferred.promise;
     };
@@ -64,7 +87,8 @@ function authServiceFactory($http, $q, backendSettings, localStorageService, $lo
         localStorageService.set('authData', {});
     };
 
-	service.login = _login;
+    service.login = _login;
+	service.loginExternal = _loginExternal;
     service.logOut = _logOut;
     service.saveRegistration = _saveRegistration;
 

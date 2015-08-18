@@ -7,15 +7,18 @@
 <form id="loginForm" ng-show="data.loginFormIsVisible">
     <div class="form-group">
         <label for="inputEmailLogin">Email</label>
-        <input type="email" class="form-control" id="inputEmailLogin" placeholder="Email">
+        <input type="email" class="form-control" id="inputEmailLogin" ng-model="data.loginData.email" placeholder="Email">
     </div>
 
     <div class="form-group">
         <label for="inputPasswordLogin">Password</label>
-        <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Password">
+        <input type="password" class="form-control" id="inputPasswordLogin" ng-model="data.loginData.password" placeholder="Password">
     </div>
 
-    <a ng-click="toggleForm()">Register if you doesn't have an account</a>
+    <button type="submit" class="btn btn-primary" ng-click="login()">Login</button>
+    <br><br>
+    <a ng-click="toggleForm()">Register if you don't have an account</a>
+    <br><br>
 </form>
 
 <form id="registerForm" ng-show="!data.loginFormIsVisible">
@@ -35,8 +38,8 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" class="form-control" id="confirmPassword" ng-model="data.registration.confirmPassword" placeholder="Confirm Password">
     </div>
-
-    <a ng-click="toggleForm()">Login to application!</a>
-
     <button type="submit" class="btn btn-primary" ng-click="signUp()">Register</button>
+    <br><br>
+    <a ng-click="toggleForm()">Login to application!</a>
+    <br><br>
 </form>

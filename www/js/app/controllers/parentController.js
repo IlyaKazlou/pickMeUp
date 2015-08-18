@@ -53,7 +53,8 @@ function parentController($scope, localStorageService,appConstants, authService,
             currentRole : currentRole,
             userIsDriver : currentRole == appConstants.roles.driverRoleName,
             authData: authData,
-            name: decodeURIComponent(authData.userName) || ""
+            name: decodeURIComponent(authData.userName) || "",
+            id: authData.id
         };
 
         return user;
